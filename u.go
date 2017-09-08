@@ -10,7 +10,6 @@ See man os_log(3).
 
 FYI: go log/syslog no longer works under macOS Sierra (10.12).
 */
-
 package ul
 
 import "fmt"
