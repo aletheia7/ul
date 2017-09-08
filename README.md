@@ -18,6 +18,7 @@ package main
 
 import (
 	"github.com/aletheia7/ul"
+	"log"
 )
 
 func main() {
@@ -34,7 +35,11 @@ func main() {
 	// Must call Release() for subsystem/category logger only
 	defer lo.Release()
 	lo.Log("hi")
+	
+	// golang log package
 
+	mylogger := log.New(lo, "stuff ", log.Lshortfile|log.Ltime)
+	mylogger.Println("wow") 
 }
 ```
 
