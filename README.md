@@ -7,7 +7,6 @@ go test -v
 ```
 
 - Requires OSX Xcode compiler
-- Made with go 1.9
 - Supports macOS os_log subsystem/category logging
 - Implements io.Writer and can be used with the go log package
 
