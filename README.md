@@ -1,4 +1,4 @@
-[![](https://img.shields.io/badge/godoc-reference-blue.svg)](https://godoc.org/github.com/aletheia7/ul) 
+[![Go Reference](https://pkg.go.dev/badge/github.com/aletheia7/ul.svg)](https://pkg.go.dev/github.com/aletheia7/ul)
 
 #### Install 
 ```bash
