@@ -15,9 +15,6 @@ FYI: go log/syslog no longer works under macOS Sierra (10.12).
 package ul
 
 import "C"
-import (
-	"unsafe"
-)
 
 type level uint8
 
@@ -33,8 +30,8 @@ type Logger struct {
 	Subsystem string
 	Category  string
 	// io.Writer Default level
-	Level    level
-	os_log_t C.os_log_t
+	Level level
+	//os_log_t C.os_log_t
 }
 
 func New() *Logger {
@@ -47,15 +44,15 @@ func New_object(subsystem, category string) *Logger {
 		Subsystem: subsystem,
 		Category:  category,
 	}
-	if 0 < len(subsystem) || 0 < len(category) {
-		s := C.CString(subsystem)
-		c := C.CString(category)
-		r.os_log_t = C.os_log_create(s, c)
-		C.free(unsafe.Pointer(s))
-		C.free(unsafe.Pointer(c))
-	} else {
-		r.os_log_t = C.os_log_default
-	}
+	//if 0 < len(subsystem) || 0 < len(category) {
+	//	s := C.CString(subsystem)
+	//	c := C.CString(category)
+	//	r.os_log_t = C.os_log_create(s, c)
+	//	C.free(unsafe.Pointer(s))
+	//	C.free(unsafe.Pointer(c))
+	//} else {
+	//	r.os_log_t = C.os_log_default
+	//}
 	return r
 }
 
