@@ -1,6 +1,8 @@
 // Copyright 2022 aletheia7. All rights reserved. Use of this source code is
 // governed by a BSD-2-Clause license that can be found in the LICENSE file.
 
+//go:build apple
+
 /*
 Package ul provides macOS Sierra/OSX Unified Loggging functionality via cgo.
 
@@ -10,7 +12,6 @@ See man os_log(3).
 
 FYI: go log/syslog no longer works under macOS Sierra (10.12).
 */
-
 package ul
 
 /*
@@ -70,7 +71,6 @@ func New() *Logger {
 }
 
 // Must call Release() to free subsystem/category
-//
 func New_object(subsystem, category string) *Logger {
 	r := &Logger{
 		Subsystem: subsystem,
@@ -89,7 +89,6 @@ func New_object(subsystem, category string) *Logger {
 }
 
 // limit: 1024
-//
 func (o *Logger) Log(s string) {
 	cs := C.CString(s)
 	C.ul_log((C.uchar)(Default), o.os_log_t, cs)
@@ -97,7 +96,6 @@ func (o *Logger) Log(s string) {
 }
 
 // limit: 1024
-//
 func (o *Logger) Logf(format string, a ...interface{}) {
 	cs := C.CString(fmt.Sprintf(format, a...))
 	C.ul_log((C.uchar)(Default), o.os_log_t, cs)
@@ -105,7 +103,6 @@ func (o *Logger) Logf(format string, a ...interface{}) {
 }
 
 // limit: 256
-//
 func (o *Logger) Info(s string) {
 	cs := C.CString(s)
 	C.ul_log((C.uchar)(Info), o.os_log_t, cs)
@@ -113,7 +110,6 @@ func (o *Logger) Info(s string) {
 }
 
 // limit: 256
-//
 func (o *Logger) Infof(format string, a ...interface{}) {
 	cs := C.CString(fmt.Sprintf(format, a...))
 	C.ul_log((C.uchar)(Info), o.os_log_t, cs)
@@ -121,7 +117,6 @@ func (o *Logger) Infof(format string, a ...interface{}) {
 }
 
 // limit: 256
-//
 func (o *Logger) Debug(s string) {
 	cs := C.CString(s)
 	C.ul_log((C.uchar)(Debug), o.os_log_t, cs)
@@ -129,7 +124,6 @@ func (o *Logger) Debug(s string) {
 }
 
 // limit: 256
-//
 func (o *Logger) Debugf(format string, a ...interface{}) {
 	cs := C.CString(fmt.Sprintf(format, a...))
 	C.ul_log((C.uchar)(Debug), o.os_log_t, cs)
@@ -137,7 +131,6 @@ func (o *Logger) Debugf(format string, a ...interface{}) {
 }
 
 // limit: 256
-//
 func (o *Logger) Error(s string) {
 	cs := C.CString(s)
 	C.ul_log((C.uchar)(Error), o.os_log_t, cs)
@@ -145,7 +138,6 @@ func (o *Logger) Error(s string) {
 }
 
 // limit: 256
-//
 func (o *Logger) Errorf(format string, a ...interface{}) {
 	cs := C.CString(fmt.Sprintf(format, a...))
 	C.ul_log((C.uchar)(Error), o.os_log_t, cs)
@@ -153,7 +145,6 @@ func (o *Logger) Errorf(format string, a ...interface{}) {
 }
 
 // limit: 256
-//
 func (o *Logger) Fault(s string) {
 	cs := C.CString(s)
 	C.ul_log((C.uchar)(Fault), o.os_log_t, cs)
@@ -161,7 +152,6 @@ func (o *Logger) Fault(s string) {
 }
 
 // limit: 256
-//
 func (o *Logger) Faultf(format string, a ...interface{}) {
 	cs := C.CString(fmt.Sprintf(format, a...))
 	C.ul_log((C.uchar)(Fault), o.os_log_t, cs)
@@ -171,7 +161,6 @@ func (o *Logger) Faultf(format string, a ...interface{}) {
 // Satifies io.Writer. Can be used with the log package.
 // Set Logger.Level for the default level
 // log.SetOutput(*ul.Logger)
-//
 func (o *Logger) Write(p []byte) (n int, err error) {
 	b := C.CBytes(p)
 	C.ul_log((C.uchar)(o.Level), o.os_log_t, (*C.char)(b))
