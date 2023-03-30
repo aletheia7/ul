@@ -1,3 +1,3 @@
-module github.com/coder-free/ul
+module github.com/aletheia7/ul
 
 go 1.20
