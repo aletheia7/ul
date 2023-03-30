@@ -1,3 +1,3 @@
-module github.com/aletheia7/ul
+module github.com/code-free/ul
 
-go 1.17
+go 1.20
