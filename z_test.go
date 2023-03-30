@@ -4,7 +4,7 @@
 package ul_test
 
 import (
-	. "github.com/code-free/ul"
+	. "github.com/coder-free/ul"
 	"log"
 	"strconv"
 	"testing"
